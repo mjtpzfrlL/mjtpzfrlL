@@ -1,0 +1,53 @@
+// IMAGE COMPARISON TOOL //
+
+# Importing the necessary libraries
+import face_recognition
+
+# Load the first image and learn how to recognize it
+image_1 = face_recognition.load_image_file("path_to_first_image.jpg")
+image_1_encoding = face_recognition.face_encodings(image_1)[0]
+
+# Load the second image and learn how to recognize it
+image_2 = face_recognition.load_image_file("path_to_second_image.jpg")
+image_2_encoding = face_recognition.face_encodings(image_2)[0]
+
+# Compare the faces
+results = face_recognition.compare_faces([image_1_encoding], image_2_encoding)
+
+# Output the results
+if results[0]:
+    print("The images are of the same person.")
+else:
+    print("The images are of different people.")
+
+// ERROR HANDLING FACE RCON //
+
+import face_recognition
+
+def load_and_encode_image(file_path):
+    try:
+        image = face_recognition.load_image_file(file_path)
+        encodings = face_recognition.face_encodings(image)
+        if not encodings:
+            raise ValueError(f"No faces found in the image: {file_path}")
+        return encodings[0]
+    except Exception as e:
+        print(f"Error loading image {file_path}: {e}")
+        return None
+
+# Load and encode the images
+image_1_encoding = load_and_encode_image("path_to_first_image.jpg")
+image_2_encoding = load_and_encode_image("path_to_second_image.jpg")
+
+# Ensure both images have been successfully encoded
+if image_1_encoding is not None and image_2_encoding is not None:
+    # Compare the faces
+    results = face_recognition.compare_faces([image_1_encoding], image_2_encoding)
+    
+    # Output the results
+    if results[0]:
+        print("The images are of the same person.")
+    else:
+        print("The images are of different people.")
+else:
+    print("One or both images could not be processed.")
