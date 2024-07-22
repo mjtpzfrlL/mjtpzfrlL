@@ -1,0 +1,18 @@
+import itertools
+import random
+
+# Load words from file
+with open('words.txt', 'r') as file:
+    words = file.read().splitlines()
+
+# Generate all combinations of 12 words from the list
+combinations = itertools.combinations(words, 12)
+
+# Shuffle combinations
+shuffled_combinations = list(combinations)
+random.shuffle(shuffled_combinations)
+
+# Save the shuffled combinations to a new file
+with open('combinations.txt', 'w') as file:
+    for combo in shuffled_combinations:
+        file.write(' '.join(combo) + '\n')
