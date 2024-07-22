@@ -1,0 +1,14 @@
+### my.dicogen
+import random
+
+# Load the words from the file
+with open('english.txt', 'r') as file:
+    words = file.read().splitlines()
+
+# Shuffle the list
+random.shuffle(words)
+
+# Save the shuffled list to a new file
+with open('shuffled_words.txt', 'w') as file:
+    for word in words:
+        file.write(f"{word}\n")
